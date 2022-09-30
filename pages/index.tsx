@@ -43,6 +43,7 @@ const Home: NextPage = () => {
   React.useEffect(() => {
     if (!hasCookie("direct-ed-user")) {
       setModal("how-to-donate");
+      setCookie("direct-ed-user", "not a stranger", { maxAge: 60 * 60 * 24 });
     }
   }, []);
 
