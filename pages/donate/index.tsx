@@ -5,11 +5,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { FaChevronLeft } from "react-icons/fa";
+import { Modal } from "../../components";
 
 const amounts: string[] = ["₳1000", "₳500", "₳100", "CUSTOM"];
 
 const Donate: NextPage = () => {
   const [amount, setAmount] = React.useState<string>("");
+  const [image, setImage] = React.useState<number | null>(null);
+  const [modal, setModal] = React.useState<boolean>(false);
   const router = useRouter();
 
   const handleDonate = () => {
@@ -46,9 +49,12 @@ const Donate: NextPage = () => {
             Select Donation Amount
           </h1>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center justify-center">
-            {amounts.map((amt: string) => (
+            {amounts.map((amt: string, index: number) => (
               <button
-                onClick={() => setAmount(amt)}
+                onClick={() => {
+                  setAmount(amt);
+                  setImage(index + 1);
+                }}
                 className={`btn w-36 ${
                   amount === amt ? "btn-primary" : "bg-gray-200 btn-ghost"
                 }`}
@@ -57,6 +63,22 @@ const Donate: NextPage = () => {
               </button>
             ))}
           </div>
+          {amount && (
+            <div className="space-y-2 flex flex-col items-center">
+              <Image
+                onClick={() => setModal(true)}
+                src={`/static/images/${image ? image : 1}.jpeg`}
+                alt="NFT"
+                width={50}
+                height={50}
+                className="rounded-md cursor-pointer "
+              />
+              <p>
+                Click to view the exclusive NFT you will receive with your
+                donation
+              </p>
+            </div>
+          )}
           <button
             onClick={handleDonate}
             className="capitalize btn btn-primary w-36"
@@ -65,6 +87,19 @@ const Donate: NextPage = () => {
           </button>
         </div>
       </main>
+      <Modal
+        open={modal}
+        onClose={() => setModal(false)}
+        className="w-full md:w-60 h-60 shadow-2xl"
+      >
+        <h1>Hello</h1>
+        <Image
+          src={`/static/images/${image ? image : 1}.jpeg`}
+          alt="NFT"
+          layout="fill"
+          className="rounded-md cursor-pointer"
+        />
+      </Modal>
     </>
   );
 };

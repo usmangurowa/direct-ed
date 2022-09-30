@@ -14,7 +14,6 @@ type LinksType = {
 const NavLinks: LinksType[] = [
   { title: "Scholarship Pools", link: "/" },
   { title: "Scholars’ Progress", link: "/progress" },
-  { title: "Transactions", link: "/transactions" },
 ];
 
 const Navbar = () => {
@@ -74,6 +73,34 @@ const Navbar = () => {
                 </a>
               </Link>
             ))}
+            <div className="dropdown dropdown-hover">
+              <label tabIndex={0}>
+                <Link href={"/transactions"} passHref>
+                  <a>
+                    <li
+                      className={`text-xl text-white ${
+                        router.pathname === "/transactions"
+                          ? "font-semibold underline"
+                          : "font-light"
+                      }`}
+                    >
+                      Transactions
+                    </li>
+                  </a>
+                </Link>
+              </label>
+              <div
+                tabIndex={0}
+                className="dropdown-content card card-compact w-60 p-2 shadow bg-white mt-1"
+              >
+                <div className="card-body">
+                  <h3 className="text-lg font-semibold">
+                    The transaction page will be available after a donation has
+                    been made
+                  </h3>
+                </div>
+              </div>
+            </div>
           </ul>
 
           <div className="dropdown dropdown-hover">
@@ -94,7 +121,7 @@ const Navbar = () => {
             {!wallet && (
               <div
                 tabIndex={0}
-                className="dropdown-content card card-compact w-52 p-2 shadow bg-white mt-1"
+                className="hidden md:block dropdown-content card card-compact w-52 p-2 shadow bg-white mt-1"
               >
                 <div className="card-body">
                   <h3 className="text-lg font-semibold">

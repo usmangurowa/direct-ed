@@ -34,7 +34,7 @@ const Modal = ({ open, onClose, children, className }: ModalPropsType) => {
         >
           <button
             onClick={handleClose}
-            className="text-primary absolute top-4 right-4"
+            className="text-primary absolute top-2 right-2 z-50"
           >
             <GrFormClose size={20} />
           </button>
