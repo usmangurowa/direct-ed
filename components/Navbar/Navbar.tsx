@@ -76,18 +76,40 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <Button
-            onCick={handleConnectWallet}
-            loading={loading}
-            loadingIndicator={"connecting..."}
-            className="bg-light text-primary hover:bg-light font-semibold hover:border-none"
-          >
-            {wallet ? (
-              <span className="normal-case text-lg">$directEd</span>
-            ) : (
-              "Connect Wallet"
+          <div className="dropdown dropdown-hover">
+            <label tabIndex={0}>
+              <Button
+                onCick={handleConnectWallet}
+                loading={loading}
+                loadingIndicator={"connecting..."}
+                className="bg-light text-primary hover:bg-light font-semibold hover:border-none"
+              >
+                {wallet ? (
+                  <span className="normal-case text-lg">$directEd</span>
+                ) : (
+                  "Connect Wallet"
+                )}
+              </Button>
+            </label>
+            {!wallet && (
+              <div
+                tabIndex={0}
+                className="dropdown-content card card-compact w-52 p-2 shadow bg-white mt-1"
+              >
+                <div className="card-body">
+                  <h3 className="text-lg font-semibold">
+                    Start by connecting your wallet
+                  </h3>
+                  <p>
+                    Need help? Follow this{" "}
+                    <Link href={"#"}>
+                      <a className="underline">link</a>
+                    </Link>
+                  </p>
+                </div>
+              </div>
             )}
-          </Button>
+          </div>
         </div>
       </nav>
       {/* Modal */}

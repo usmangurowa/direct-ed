@@ -3,7 +3,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { Button, Modal, PoolCard } from "../components";
 import { useRouter } from "next/router";
-import Link from "next/link";
+
+import { hasCookie, setCookie } from "cookies-next";
+import Image from "next/image";
 
 type DataType = {
   title: string;
@@ -22,18 +24,27 @@ const data: DataType[] = [
 ];
 
 const Home: NextPage = () => {
-  const [dontateModal, setDonateModal] = React.useState<boolean>(false);
+  const [modal, setModal] = React.useState<
+    "donate-done" | "how-to-donate" | "video" | ""
+  >("");
+
   const router = useRouter();
 
   const handleDonationModal = () => {
-    setDonateModal(false);
+    setModal("");
     router.push("/progress");
   };
   React.useEffect(() => {
     if (router.query && router.query.from === "donation") {
-      setDonateModal(true);
+      setModal("donate-done");
     }
   }, [router.query]);
+
+  React.useEffect(() => {
+    if (!hasCookie("direct-ed-user")) {
+      setModal("how-to-donate");
+    }
+  }, []);
 
   return (
     <>
@@ -50,9 +61,10 @@ const Home: NextPage = () => {
           <PoolCard key={d.title} {...d} />
         ))}
       </main>
+      {/* Donate Modal */}
       <Modal
-        open={dontateModal}
-        onClose={() => setDonateModal(false)}
+        open={modal === "donate-done"}
+        onClose={() => setModal("")}
         className="h-fit rounded-md bg-light w-fit p-5 md:w-2/5 space-y-6 flex flex-col justify-center items-center"
       >
         <h1 className="text-3xl font-bold text-dark2 text-center">
@@ -71,6 +83,49 @@ const Home: NextPage = () => {
         >
           {"View Scholar’s Progress"}
         </Button>
+      </Modal>
+      {/* How To Modal */}
+      <Modal
+        open={modal === "how-to-donate"}
+        onClose={() => setModal("")}
+        className="h-fit rounded-md bg-light w-fit p-5 md:w-1/4 space-y-5 flex flex-col justify-center items-center"
+      >
+        <h1 className="text-3xl font-bold text-dark2 text-center">
+          How To Donate
+        </h1>
+        <p className="text-sm">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+          accusantium eaque nihil omnis! Dignissimos provident porro magni
+          fugiat molestiae temporibus assumenda repellat amet.
+        </p>
+        <p className="text-sm">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+          accusantium eaque nihil omnis! Dignissimos provident porro magni
+          fugiat molestiae temporibus assumenda repellat amet.
+        </p>
+
+        <div className="w-full h-40 relative">
+          <Image
+            onClick={() => setModal("video")}
+            src="/static/images/video.png"
+            layout="fill"
+            alt="image"
+          />
+        </div>
+        <Button
+          onCick={handleDonationModal}
+          className="btn-ghost bg-light2 text-primary font-bold text-lg w-fit"
+        >
+          Learn more
+        </Button>
+      </Modal>
+      {/* Video modal */}
+      <Modal
+        open={modal === "video"}
+        onClose={() => setModal("how-to-donate")}
+        className="h-64 relative rounded-3xl overflow-hidden  w-full p-5 md:w-2/5 flex flex-col justify-center items-center"
+      >
+        <Image src="/static/images/video.png" layout="fill" alt="image" />
       </Modal>
     </>
   );

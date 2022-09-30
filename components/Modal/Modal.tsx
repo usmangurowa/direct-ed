@@ -1,5 +1,7 @@
 import React from "react";
 
+import { GrFormClose } from "react-icons/gr";
+
 type ModalPropsType = {
   open: boolean;
   onClose?(): void;
@@ -30,6 +32,13 @@ const Modal = ({ open, onClose, children, className }: ModalPropsType) => {
           onClick={handleStopPropagation}
           className={`modal-box ${className}`}
         >
+          <button
+            onClick={handleClose}
+            className="text-primary absolute top-4 right-4"
+          >
+            <GrFormClose size={20} />
+          </button>
+
           {children}
         </div>
       </div>
