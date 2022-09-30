@@ -5,8 +5,7 @@ const Transactions: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Direct Ed</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{"Transactions"}</title>
       </Head>
       <main className="container grid grid-cols-1 md:grid-cols-2 gap-10 py-8  justify-items-center">
         <div className="col-span-2">

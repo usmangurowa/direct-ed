@@ -25,7 +25,7 @@ const Modal = ({ open, onClose, children, className }: ModalPropsType) => {
         id="my-modal"
         className="modal-toggle"
       />
-      <div className="modal" onClick={onClose}>
+      <div className="modal p-10" onClick={onClose}>
         <div
           onClick={handleStopPropagation}
           className={`modal-box ${className}`}

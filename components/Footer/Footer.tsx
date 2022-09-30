@@ -15,8 +15,8 @@ const NavLinks: LinksType[] = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary h-[10vh] w-full">
-      <div className="h-full w-full container flex items-center justify-between">
+    <footer className="bg-primary h-fit py-4 w-full">
+      <div className="h-full w-full container flex flex-col md:flex-row items-center justify-between space-y-5 md:space-y-0">
         <Link href="https://directed.dev/">
           <button className="btn btn-sm bg-primary-light border-none hover:bg-primary-light hover:border-none text-white">
             need help?

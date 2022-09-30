@@ -5,7 +5,7 @@ import { MdOutlineAccessTime } from "react-icons/md";
 
 const PoolsCard = ({ title, image }: { title?: string; image?: string }) => {
   return (
-    <div className="w-4/5 bg-light2 rounded-lg overflow-hidden shadow-md">
+    <div className="w-full h-fit md:w-4/5 bg-light2 rounded-lg overflow-hidden shadow-md">
       <div className="w-full h-48 relative">
         <Image src={`${image}`} layout="fill" alt="Pool Image" />
       </div>
@@ -46,7 +46,9 @@ const PoolsCard = ({ title, image }: { title?: string; image?: string }) => {
         </h1>
       </div>
       <div className="flex items-center justify-center p-5">
-        <button className="btn btn-primary">donate now</button>
+        <Link href={"/donate"}>
+          <button className="btn btn-primary">donate now</button>
+        </Link>
       </div>
     </div>
   );

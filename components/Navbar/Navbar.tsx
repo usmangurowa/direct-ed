@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { sleep } from "../../utils";
+import Button from "../Button";
 import Modal from "../Modal";
 
 type LinksType = {
@@ -35,10 +36,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-primary h-[10vh] w-full">
-        <div className="navbar h-full w-full container">
+      <nav className="bg-primary h-fit py-2 w-full">
+        <div className="container flex  items-center justify-between w-full h-full">
           <Link href="https://directed.dev/">
-            <div className="navbar-start flex items-center space-x-3 cursor-pointer">
+            <div className="flex items-center space-x-3 cursor-pointer">
               <Image
                 id="logo"
                 src="/static/images/logo.png"
@@ -56,45 +57,37 @@ const Navbar = () => {
               </div>
             </div>
           </Link>
-          <div className="navbar-center">
-            <ul className="flex items-center space-x-5">
-              {NavLinks.map((link: LinksType, index: number) => (
-                <Link href={link.link} passHref>
-                  <a>
-                    <li
-                      className={`text-xl text-white ${
-                        router.pathname === link.link
-                          ? "font-semibold underline"
-                          : "font-light"
-                      }`}
-                    >
-                      {link.title}
-                    </li>
-                  </a>
-                </Link>
-              ))}
-            </ul>
-          </div>
-          <div className="navbar-end">
-            <button
-              onClick={handleConnectWallet}
-              className={`btn modal-button bg-light text-primary hover:bg-light font-semibold hover:border-none ${
-                loading && "loading"
-              }`}
-            >
-              {loading ? (
-                "connecting..."
-              ) : (
-                <>
-                  {wallet ? (
-                    <span className="normal-case text-lg">$directEd</span>
-                  ) : (
-                    "Connect Wallet"
-                  )}
-                </>
-              )}
-            </button>
-          </div>
+
+          <ul className="hidden md:flex items-center space-x-5">
+            {NavLinks.map((link: LinksType, index: number) => (
+              <Link href={link.link} passHref>
+                <a>
+                  <li
+                    className={`text-xl text-white ${
+                      router.pathname === link.link
+                        ? "font-semibold underline"
+                        : "font-light"
+                    }`}
+                  >
+                    {link.title}
+                  </li>
+                </a>
+              </Link>
+            ))}
+          </ul>
+
+          <Button
+            onCick={handleConnectWallet}
+            loading={loading}
+            loadingIndicator={"connecting..."}
+            className="bg-light text-primary hover:bg-light font-semibold hover:border-none"
+          >
+            {wallet ? (
+              <span className="normal-case text-lg">$directEd</span>
+            ) : (
+              "Connect Wallet"
+            )}
+          </Button>
         </div>
       </nav>
       {/* Modal */}
