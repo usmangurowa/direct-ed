@@ -17,12 +17,16 @@ const Footer = () => {
   return (
     <footer className="bg-primary h-[10vh] w-full">
       <div className="h-full w-full container flex items-center justify-between">
-        <button className="btn btn-sm bg-primary-light border-none hover:bg-primary-light hover:border-none text-white">
-          need help?
-        </button>
-        <button className="btn btn-sm bg-primary-light border-none hover:bg-primary-light hover:border-none text-white">
-          have a suggestion?
-        </button>
+        <Link href="https://directed.dev/">
+          <button className="btn btn-sm bg-primary-light border-none hover:bg-primary-light hover:border-none text-white">
+            need help?
+          </button>
+        </Link>
+        <Link href="https://directed.dev/">
+          <button className="btn btn-sm bg-primary-light border-none hover:bg-primary-light hover:border-none text-white">
+            have a suggestion?
+          </button>
+        </Link>
         <div className="flex flex-col">
           <span className="text-white">
             Terms and Conditions | Privacy Policy{" "}

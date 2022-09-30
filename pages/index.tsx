@@ -2,6 +2,22 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { PoolCard } from "../components";
 
+type DataType = {
+  title: string;
+  image: string;
+};
+
+const data: DataType[] = [
+  {
+    title: "Kagumo High School",
+    image: "/static/images/kagumo.png",
+  },
+  {
+    title: "Strathmore High School",
+    image: "/static/images/strathmore.png",
+  },
+];
+
 const Home: NextPage = () => {
   return (
     <>
@@ -15,8 +31,9 @@ const Home: NextPage = () => {
             Scholarship Pools
           </h1>
         </div>
-        <PoolCard />
-        <PoolCard />
+        {data.map((d: DataType) => (
+          <PoolCard key={d.title} {...d} />
+        ))}
       </main>
     </>
   );

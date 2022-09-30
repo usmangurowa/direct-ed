@@ -1,18 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { MdOutlineAccessTime } from "react-icons/md";
 
-const PoolsCard = () => {
+const PoolsCard = ({ title, image }: { title?: string; image?: string }) => {
   return (
     <div className="w-4/5 bg-light2 rounded-lg overflow-hidden shadow-md">
       <div className="w-full h-48 relative">
-        <Image src="/static/images/kagumo.png" layout="fill" alt="Pool Image" />
+        <Image src={`${image}`} layout="fill" alt="Pool Image" />
       </div>
       <div className="p-5">
-        <h1 className="font-semibold text-xl text-center">
-          Kagumo High School
-        </h1>
-        <p className="text-center">Read more</p>
+        <h1 className="font-semibold text-xl text-center">{title}</h1>
+        <Link href={"https://directed.dev/"} passHref>
+          <a>
+            <p className="text-center">Read more</p>
+          </a>
+        </Link>
       </div>
       <div className="px-5">
         <div className="divide-x divide-light flex items-center w-full border-b border-light">
